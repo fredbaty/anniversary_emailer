@@ -1,0 +1,15 @@
+QI FACT OF THE MONTH:
+[PLAIN_FACT]
+
+* * *
+
+In [MONTH] [YEAR] the following anniversaries will be marked:
+
+FABER:
+[PLAIN_FABER]
+FILMS:
+[PLAIN_FILM]
+MUSIC:
+[PLAIN_MUSIC]
+EVENTS:
+[PLAIN_WIKI]
