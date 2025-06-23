@@ -2,7 +2,7 @@ version: '3'
 
 services:
   anniversary-app:
-    build: .
+    build: 2.0
     restart: always
     ports:
       - "8989:8989"  # Map container port 8989 to host port 8989

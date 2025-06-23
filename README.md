@@ -36,6 +36,8 @@ anniversary_finder/
 ├── gunicorn_config.py         # Gunicorn configuration
 ├── Dockerfile                 # Docker image definition
 ├── docker-compose.yml         # Docker Compose configuration
+├── docker-entrypoint.sh       # Container initialization script
+├── docker-manage.sh           # Helper script for Docker management
 └── requirements.txt           # Python dependencies
 ```
 
@@ -76,62 +78,25 @@ docker-compose down           # Stop
 docker-compose logs -f        # View logs
 docker-compose ps             # Check status
 ```
-pip install -r requirements.txt
-```
 
-3. Initialize the database (migrate data from CSV files if not already done):
-```bash
-cd migrations
-python csv_to_sqlite.py
-cd ..
-```
+## Docker Configuration
 
-4. Run the application:
-```bash
-python app.py
-```
+The application is configured to run in Docker with the following settings:
 
-5. Open your browser and navigate to:
-```
-http://localhost:5001
-```
+- **Port**: The application runs on port 8989
+- **Data Persistence**: 
+  - Database file is persisted outside the container
+  - Logs are stored outside the container
+  - Data files are mounted from the host
+- **Health Checks**: The container includes automatic health monitoring
 
-## Deployment on Home Server
-
-For deployment on a Debian home server with SWAG (Secure Web Application Gateway) as a reverse proxy:
-
-1. Install the application on your server
-2. Set up a systemd service to run the application
-3. Configure SWAG to proxy requests to your Flask application
-
-Example systemd service file (`/etc/systemd/system/anniversary-finder.service`):
-```
-[Unit]
-Description=Anniversary Finder Web App
-After=network.target
-
-[Service]
-User=your_username
-WorkingDirectory=/path/to/anniversary_finder
-ExecStart=/usr/bin/python3 /path/to/anniversary_finder/app.py
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-```
+For more detailed Docker deployment information, see the [Docker Deployment Guide](DOCKER.md).
 
 ## Usage
 
 1. Select a month and year from the dropdown menus
 2. Click "Find Anniversaries" to see all significant anniversaries for that period
 3. Browse the results organized by category
-
-## Development
-
-The application is built with:
-- Flask (Python web framework)
-- SQLite (Database)
-- HTML/CSS (Frontend)
 
 ## Example Output
 
