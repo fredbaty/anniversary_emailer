@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ data.month }} {{ data.year }} Anniversaries</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container results">
+        <h1>{{ data.month }} {{ data.year }} Anniversaries</h1>
+        
+        <div class="fact-box">
+            <h2>QI FACT OF THE MONTH</h2>
+            <p><em>{{ data.fact }}</em></p>
+        </div>
+        
+        <p>In <strong>{{ data.month }} {{ data.year }}</strong> the following anniversaries will be marked:</p>
+        
+        <!-- Faber section -->
+        {% if data.categories.Faber %}
+        <section class="category">
+            <h2>FABER</h2>
+            <ul>
+                {% for item in data.categories.Faber %}
+                <li>{{ item|safe }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+        
+        <!-- Films section -->
+        {% if data.categories.Film %}
+        <section class="category">
+            <h2>FILMS</h2>
+            <ul>
+                {% for item in data.categories.Film %}
+                <li>{{ item|safe }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+        
+        <!-- Music section -->
+        {% if data.categories.Album %}
+        <section class="category">
+            <h2>MUSIC</h2>
+            <ul>
+                {% for item in data.categories.Album %}
+                <li>{{ item|safe }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+        
+        <!-- Wiki events section -->
+        {% if data.categories.Wiki %}
+        <section class="category">
+            <h2>EVENTS</h2>
+            <ul>
+                {% for item in data.categories.Wiki %}
+                <li>{{ item|safe }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+        
+        <div class="back-link">
+            <a href="{{ url_for('index') }}" class="btn">Search Again</a>
+        </div>
+    </div>
+</body>
+</html>

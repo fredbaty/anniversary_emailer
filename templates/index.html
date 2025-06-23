@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anniversary Finder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Faber Anniversary Finder</h1>
+        <p>Select a month and year to find significant Faber anniversaries</p>
+        
+        <form method="post" action="{{ url_for('index') }}">
+            <div class="form-group">
+                <label for="month">Month:</label>
+                <select id="month" name="month" required>
+                    {% for month_num, month_name in months %}
+                        <option value="{{ month_num }}" {% if month_num == default_month %}selected{% endif %}>{{ month_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="year">Year:</label>
+                <select id="year" name="year" required>
+                    {% for year in years %}
+                        <option value="{{ year }}" {% if year == default_year %}selected{% endif %}>{{ year }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <button type="submit" class="btn">Find Anniversaries</button>
+        </form>
+    </div>
+</body>
+</html>
