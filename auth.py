@@ -1,5 +1,0 @@
-SMTP_ADDR = "smtp_server_here"
-GM_PWD = "yr_pwd_here"
-SENDER = "yr_email_here"
-TO = "to_addr_here"
-BCC = "bcc_addr_here"

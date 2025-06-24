@@ -1,19 +1,103 @@
-# anniversary_emailer
-<h2>Overview</h2>
+# Anniversary Finder Web App
 
-A monthly email updater written in Python, listing forthcoming newsworthy and cultural (book/film/music) anniversaries. 
+## Overview
 
-(Oh, and a fact from the brains at QI -- knowledge is power, after all.)
+A lightweight web application that helps you discover noteworthy cultural and historical anniversaries for any given month and year. The app integrates data from various sources:
 
-<h2>Usage</h2>
+- Books and authors (from Faber)
+- Films from the "1001 Movies You Must See Before You Die" list
+- Albums from the "1001 Albums You Must Hear Before You Die" list
+- Historical events from Wikipedia's "On This Day" pages
+- Random interesting facts from QI
 
-<ol>
-  <li>Set anniversary year using the "search_year" variable in main.py.</li>
-  <li>Add your email server and address info to auth.py.</li>
-  <li>Revel in never again missing an opportunity to showcase the breadth of your cultural awareness.</li>
-</ol>
+## Features
 
-<h2>Example output</h2>
+- Simple, responsive web interface
+- Select any month and year to find significant anniversaries
+- Results organized by category (Books/Authors, Films, Music, Historical Events)
+- SQLite database for efficient data storage
+- Lightweight design for easy deployment with Docker
+
+## Project Structure
+
+```
+anniversary_finder/
+├── app/                       # Main application package
+│   ├── models/                # Database models
+│   ├── routes/                # Web routes and views
+│   ├── services/              # Business logic
+│   └── utils/                 # Helper utilities
+├── data/                      # Data files (facts.txt)
+├── static/                    # CSS, JS, and other static files
+├── templates/                 # HTML templates
+├── app.py                     # Application entry point
+├── wsgi.py                    # WSGI entry point for production servers
+├── gunicorn_config.py         # Gunicorn configuration
+├── Dockerfile                 # Docker image definition
+├── docker-compose.yml         # Docker Compose configuration
+├── docker-entrypoint.sh       # Container initialization script
+├── docker-manage.sh           # Helper script for Docker management
+└── requirements.txt           # Python dependencies
+```
+
+## Deployment with Docker
+
+The simplest way to deploy this application is using Docker:
+
+1. **Clone the repository:**
+```bash
+git clone https://github.com/yourusername/anniversary_finder.git
+cd anniversary_finder
+```
+
+2. **Start the application using the management script:**
+```bash
+./docker-manage.sh start
+```
+
+3. **Access the application:**
+Open your browser and navigate to:
+```
+http://localhost:8989
+```
+
+4. **Management commands:**
+```bash
+./docker-manage.sh status    # Check container status
+./docker-manage.sh logs      # View logs
+./docker-manage.sh stop      # Stop the application
+./docker-manage.sh restart   # Restart the application
+./docker-manage.sh rebuild   # Rebuild after code changes
+```
+
+Alternatively, you can use Docker Compose commands directly:
+```bash
+docker-compose up -d          # Start
+docker-compose down           # Stop
+docker-compose logs -f        # View logs
+docker-compose ps             # Check status
+```
+
+## Docker Configuration
+
+The application is configured to run in Docker with the following settings:
+
+- **Port**: The application runs on port 8989
+- **Data Persistence**: 
+  - Database file is persisted outside the container
+  - Logs are stored outside the container
+  - Data files are mounted from the host
+- **Health Checks**: The container includes automatic health monitoring
+
+For more detailed Docker deployment information, see the [Docker Deployment Guide](DOCKER.md).
+
+## Usage
+
+1. Select a month and year from the dropdown menus
+2. Click "Find Anniversaries" to see all significant anniversaries for that period
+3. Browse the results organized by category
+
+## Example Output
 
 <html>
   <body>
