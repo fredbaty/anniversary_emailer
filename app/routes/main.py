@@ -9,15 +9,13 @@ from app.services import anniversary as services
 # Initialize the Flask app
 app = Flask(
     __name__,
-    template_folder=os.path.join(
-        os.path.dirname(os.path.dirname(__file__)), "templates"
-    ),
-    static_folder=os.path.join(os.path.dirname(os.path.dirname(__file__)), "static"),
+    template_folder="/app/templates",
+    static_folder="/app/static",
 )
 app.config["SECRET_KEY"] = os.urandom(24)
 
 # Initialize the database
-db_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "database.db")
+db_path = "/app/database.db"
 db = Database(db_path)
 
 # Register a function to close the database connection when the app shuts down
