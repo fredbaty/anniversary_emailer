@@ -1,9 +1,12 @@
 import wikipediaapi as wa
+import logging
 import re
 import pandas as pd
 from random import choice
 import sqlite3
 from datetime import datetime
+
+log = logging.getLogger(__name__)
 
 ANNIVERSARIES = [
     10,
@@ -108,12 +111,20 @@ def add_date_to_wiki_events(current_month_name, monthly_anniversaries):
     date = ""
     date_object = None
     for line in monthly_anniversaries.text.splitlines():
-        if line.strip():
-            if line.startswith(current_month_name):
-                date = line.split(":")[0].strip()
+        if not line.strip():
+            continue
+        if line.startswith(current_month_name):
+            date = line.split(":")[0].strip()
+            try:
                 date_object = datetime.strptime(date, "%B %d")
-            elif date_object is not None:
-                events_dict.update({line.strip(): date_object})
+            except ValueError:
+                log.error(
+                    "Skipping invalid date format in line: %s", line, exc_info=True
+                )
+                date_object = None
+                continue
+        elif date_object is not None:
+            events_dict.update({line.strip(): date_object})
     return events_dict
 
 
