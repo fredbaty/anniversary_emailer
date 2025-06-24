@@ -28,7 +28,6 @@ anniversary_finder/
 │   ├── services/              # Business logic
 │   └── utils/                 # Helper utilities
 ├── data/                      # Data files (facts.txt)
-├── migrations/                # Database migration scripts
 ├── static/                    # CSS, JS, and other static files
 ├── templates/                 # HTML templates
 ├── app.py                     # Application entry point

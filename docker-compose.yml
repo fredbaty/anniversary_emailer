@@ -2,14 +2,15 @@ version: '3'
 
 services:
   anniversary-app:
+    container_name: anniversaries
     build: .
     restart: always
     ports:
       - "8989:8989"  # Map container port 8989 to host port 8989
     volumes:
-      - ~/anniversaries/logs:/app/logs
-      - ~/anniversaries/database.db:/app/database.db
-      - ~/anniversaries/data:/app/data
+      - home/fred/anniversaries/logs:/app/logs
+      - home/fred/anniversaries/database.db:/app/database.db
+      - home/fred/anniversaries/data:/app/data
     environment:
       - PYTHONUNBUFFERED=1  # Make Python output unbuffered for better logging
     healthcheck:
